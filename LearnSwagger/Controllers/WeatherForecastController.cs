@@ -4,6 +4,7 @@ namespace LearnSwagger.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -18,7 +19,12 @@ namespace LearnSwagger.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Gets a list of weather forecasts.
+        /// </summary>
+        /// <returns>A list of weather forecasts</returns>
         [HttpGet(Name = "GetWeatherForecast")]
+        [ProducesResponseType(typeof(IEnumerable<WeatherForecast>), 200)]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
